@@ -35,7 +35,7 @@ def main(args):
     unit_energy = Hartree if args.unit_energy == 'Hartree' else 1.0
     unit_force = Hartree if args.unit_force == 'Hartree' else 1.0
 
-    atoms = read_structure(args.input_file)  # 或 .gro, .cif 等
+    atoms = read_structure(args.input_file) 
     if any(atoms.pbc):
         is_pbc = True
     else:
