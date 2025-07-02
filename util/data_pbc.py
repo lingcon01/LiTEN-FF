@@ -18,14 +18,11 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 
 @torch_compile
 def pbc_neighbors(atoms, cutoff=5.0, loop=True):
-    # Step 1: 用 ASE 获取邻接信息 (NumPy)
     i, j, S = neighbour_list("ijS", atoms=atoms, cutoff=cutoff)
 
     mask = ~((i == j))
-    # print(f"去除的周期性自环数量: {np.sum(~mask)}")
     i, j, S = i[mask], j[mask], S[mask]
 
-    # 添加自环
     if loop:
         n = len(atoms)
         self_i = np.arange(n)
@@ -36,7 +33,6 @@ def pbc_neighbors(atoms, cutoff=5.0, loop=True):
         j = np.concatenate([j, self_j])
         S = np.concatenate([S, self_S])
 
-    # 最后转为 torch 并移动到目标设备
     edge_index = torch.from_numpy(np.stack([i, j], axis=0)).long()
     edge_shift = torch.from_numpy(S).float()
 
@@ -44,7 +40,6 @@ def pbc_neighbors(atoms, cutoff=5.0, loop=True):
 
 @torch_compile
 def pbc_neighbors2(positions, cutoff, pbc, cell, loop=True):
-    # Step 1: 用 ASE 获取邻接信息 (NumPy)
     i, j, S = neighbour_list(
         quantities="ijS",
         pbc=pbc,
@@ -54,10 +49,8 @@ def pbc_neighbors2(positions, cutoff, pbc, cell, loop=True):
     )
 
     mask = ~((i == j))
-    # print(f"去除的周期性自环数量: {np.sum(~mask)}")
     i, j, S = i[mask], j[mask], S[mask]
 
-    # 添加自环
     if loop:
         n = len(positions)
         self_i = np.arange(n)
@@ -68,7 +61,6 @@ def pbc_neighbors2(positions, cutoff, pbc, cell, loop=True):
         j = np.concatenate([j, self_j])
         S = np.concatenate([S, self_S])
 
-    # 最后转为 torch 并移动到目标设备
     edge_index = torch.from_numpy(np.stack([i, j], axis=0)).long()
     edge_shift = torch.from_numpy(S).float()
 
@@ -89,7 +81,6 @@ class AtomicEnergiesBlock(nn.Module):
         self.charge_max = max(max(qs) for qs in z_charge_energy.values())
         self.charge_offset = -self.charge_min
 
-        # 创建查找表
         energy_table = torch.full(
             (self.z_max + 1, self.charge_max - self.charge_min + 1),
             float('nan'),
