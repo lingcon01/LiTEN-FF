@@ -6,7 +6,6 @@ from util.data_pbc import *
 from util.read_strucuture import *
 from LITCalculator.LiTEN_Calculator import *
 
-# === 主函数 ===
 def main(args):
     torch.set_float32_matmul_precision('high')
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
