@@ -46,7 +46,6 @@ def main(args):
     else:
         print(f"[X] Molecule did not converge in {os.path.basename(args.input_file)}")
 
-# === 命令行参数 ===
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run Opt with LiTEN-FF model using ASE.")
 
