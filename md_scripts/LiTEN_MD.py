@@ -23,7 +23,7 @@ from util.data_pbc import *
 from util.read_strucuture import *
 from LITCalculator.LiTEN_Calculator import *
 
-# === 主函数 ===
+
 def main(args):
     torch.set_float32_matmul_precision('high')
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -51,7 +51,6 @@ def main(args):
 
     atoms.calc = LiTENCalculator(model_name=args.model_name, is_pbc=is_pbc, is_batch=False, atoms=atoms, **config)
 
-    # === 能量最小化 ===
     if args.optimize:
         print("Running geometry optimization before MD...")
         print("Please wait a moment, model is on compiling...")
@@ -59,7 +58,6 @@ def main(args):
         opt.run(fmax=0.05, steps=args.maxstep)
         print("Geometry optimization complete. Starting MD...")
 
-    # === 初始化速度 + MD模拟 ===
     MaxwellBoltzmannDistribution(atoms, temperature_K=args.temperature)
     dyn = Langevin(atoms, timestep=args.timestep * fs, temperature_K=args.temperature, friction=args.friction / fs)
 
@@ -76,7 +74,6 @@ def main(args):
     print(f'Total simulation finished')
 
 
-# === 命令行参数 ===
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run MD with LiTEN-FF model using ASE.")
 
