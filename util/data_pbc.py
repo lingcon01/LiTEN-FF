@@ -82,7 +82,6 @@ class AtomicEnergiesBlock(nn.Module):
         self.charge_max = max(max(qs) for qs in z_charge_energy.values())
         self.charge_offset = -self.charge_min
 
-        # 创建查找表
         energy_table = torch.full(
             (self.z_max + 1, self.charge_max - self.charge_min + 1),
             float('nan'),
