@@ -97,7 +97,7 @@ if __name__ == '__main__':
     parser.add_argument('--unit_force', type=str, default='Hartree', help='Force unit (Hartree or 1.0)')
 
     parser.add_argument('--optimize', type=bool, default=True, help='Run geometry optimization before MD')
-    parser.add_argument('--maxstep', type=int, default=100, help='Run geometry optimization before MD')
+    parser.add_argument('--maxstep', type=int, default=10, help='Run geometry optimization before MD')
 
     args = parser.parse_args()
     main(args)
