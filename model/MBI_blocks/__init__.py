@@ -1,2 +1,2 @@
-from .Quar_Painn import *
+from .TQA import *
 from .utils import *
