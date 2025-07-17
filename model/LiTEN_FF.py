@@ -9,7 +9,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import logging
-from model.MBI_blocks.Quar_Painn import *
+from model.MBI_blocks.TQA import *
 from model.MBI_blocks.utils import *
 # from util.data_pbc import pbc_neighbors
 
