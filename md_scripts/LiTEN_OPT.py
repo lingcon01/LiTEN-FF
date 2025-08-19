@@ -2,7 +2,7 @@ import os
 import sys
 from rdkit.Chem import rdmolfiles
 from ase.io import read, write
-sys.path.append(sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from util.data_pbc import *
 from util.read_strucuture import *
 from LITCalculator.LiTEN_Calculator import *
