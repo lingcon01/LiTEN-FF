@@ -16,7 +16,7 @@ from ase.units import fs, Hartree
 from torch_cluster import radius_graph
 from torch_scatter import scatter
 
-sys.path.append('/home/suqun/model/LiTEN-FF')
+sys.path.append(sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from model.LiTEN_FF import LiTEN
 from util.data_pbc import *
 
