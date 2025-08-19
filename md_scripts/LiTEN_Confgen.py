@@ -23,7 +23,7 @@ from ase.data import chemical_symbols
 import glob
 from typing import List, Optional
 
-sys.path.append('..')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from util.read_strucuture import *
 from LITCalculator.LiTEN_Calculator import *
 from dataset.Ase_dataset import *
