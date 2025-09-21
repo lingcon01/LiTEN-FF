@@ -29,7 +29,7 @@ PBC_path = os.path.join(parent_dir, 'checkpoints', 'LiTEN_PBC.model')
 model_checkpoints = {
     "LiTEN_Nab": Nab_path,
     "LiTEN_SPICE": SPICE_path,
-    "LiTEN_PBC": SPICE_path
+    "LiTEN_PBC": PBC_path
 }
 
 
