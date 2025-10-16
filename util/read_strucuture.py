@@ -36,7 +36,7 @@ def convert_rdkit_mol_to_ase(mol) -> Optional[Atoms]:
     """Convert RDKit Mol to ASE Atoms"""
     if mol is None:
         return None
-    AllChem.EmbedMolecule(mol, AllChem.ETKDG())
+    # AllChem.EmbedMolecule(mol, AllChem.ETKDG())
     conf = mol.GetConformer()
 
     symbols = [atom.GetSymbol() for atom in mol.GetAtoms()]
